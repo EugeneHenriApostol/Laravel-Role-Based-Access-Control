@@ -6,21 +6,22 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>@yield('page-title')</title>
     <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
+    <script src="{{ asset('js/axios.min.js') }}"></script>
     <style>
         * {
             font-family: calibri;
-            font-size: 1.3rem;
+            font-size: 1.2rem;
         }
 
-        .auth-labels {
+        /* .auth-labels {
               display:inline-block;
               width: 8em;
         }
 
         .auth-textbox {
             /* display: inline-block; */
-            margin-bottom: .5em;
-        }
+            /* margin-bottom: .5em; */
+        /* } */
     </style>
 </head>
 <body>
@@ -54,4 +55,5 @@
         </div>
     </div>
 </body>
+@yield('js-scripts')
 </html>

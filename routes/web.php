@@ -24,6 +24,9 @@ Route::middleware('auth')->group(function(){
 
     Route::get('/admin', [AdminController::class, 'index'])->name('dash')->middleware('role:admin');
     Route::get('/admin/users',[AdminController::class,'manageUsers'])->name('usertool')->middleware('role:admin');
+    Route::get('/admin/user/detail/{id}',[AdminController::class,'manageUserDetails'])->name('userdetails')->middleware('role:admin');
+    Route::put('/admin/user/detail/{id}',[AdminController::class,'storeUserDetails'])->name('saveuserdetails')->middleware('role:admin');
+    Route::get('/admin/user/pprofile/{id}',[AdminController::class,'getPermissionProfiles'])->name('pprofiles')->middleware('role:admin');
 
     Route::get('/acctg/new',[BookController::class,'newLedgerEntry'])->middleware(['role:admin,bookeeper,auditor'])->name('newledger');
     Route::post('/acctg/new',[BookController::class,'saveNewLedgerEntry'])->middleware('role:admin,bookeeper')->name('saveledger');
