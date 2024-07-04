@@ -1,62 +1,63 @@
 @extends('mainLayout')
 
-@section('title','Manage Users')
+@section('title', 'Manage Users')
 
 @section('page-content')
 <div class="container-fluid">
-    <div class="row">
-        <div class="col fs-5 text-start">
-            <table class="table ms-0 mb-0">
-                <tr>
-                   <td class="bg-black text-light ps-3 fw-bold">User Management</td>
-                </tr>
-            </table>
+    <div class="row mt-4">
+        <div class="col">
+            <div class="bg-secondary text-white fs-5 p-2 text-start text-center">
+                USER MANAGEMENT
+            </div>
         </div>
     </div>
-    <div class="row">
+    <div class="row mt-3">
         <div class="col">
-            <table class="table table-striped-columns table-hover table-primary fs-6">
-                 <tr class="text-center">
-                    <th>User ID</th>
-                    <th>User Name</th>
-                    <th>Full Name</th>
-                    <th>E-mail</th>
-                    <th colspan="2">Actions</th>
-                 </tr>
-                 @foreach($users as $user)
+            <table class="table table-striped table-bordered">
+                <thead class="table-secondary">
+                    <tr class="text-center">
+                        <th>User ID</th>
+                        <th>User Name</th>
+                        <th>Full Name</th>
+                        <th>E-mail</th>
+                        <th colspan="2">Actions</th>
+                    </tr>
+                </thead>
+                <tbody class="fs-6">
+                    @foreach($users as $user)
                     <tr>
                         <td>{{ $user->id }}</td>
                         <td>{{ $user->name }}</td>
                         <td>{{ $user->userInfo->user_firstname.' '.$user->userInfo->user_lastname }}</td>
                         <td>{{ $user->email }}</td>
                         <td class="text-center">
-                            <a href="{{ route('userdetails', $user->id) }}" title="Manage Selected User" class="pt-.5 pb-2 px-1">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="green" class="bi bi-tools" viewBox="0 0 16 16">
-                                    <path d="M1 0 0 1l2.2 3.081a1 1 0 0 0 .815.419h.07a1 1 0 0 1 .708.293l2.675 2.675-2.617 2.654A3.003 3.003 0 0 0 0 13a3 3 0 1 0 5.878-.851l2.654-2.617.968.968-.305.914a1 1 0 0 0 .242 1.023l3.27 3.27a.997.997 0 0 0 1.414 0l1.586-1.586a.997.997 0 0 0 0-1.414l-3.27-3.27a1 1 0 0 0-1.023-.242L10.5 9.5l-.96-.96 2.68-2.643A3.005 3.005 0 0 0 16 3q0-.405-.102-.777l-2.14 2.141L12 4l-.364-1.757L13.777.102a3 3 0 0 0-3.675 3.68L7.462 6.46 4.793 3.793a1 1 0 0 1-.293-.707v-.071a1 1 0 0 0-.419-.814zm9.646 10.646a.5.5 0 0 1 .708 0l2.914 2.915a.5.5 0 0 1-.707.707l-2.915-2.914a.5.5 0 0 1 0-.708M3 11l.471.242.529.026.287.445.445.287.026.529L5 13l-.242.471-.026.529-.445.287-.287.445-.529.026L3 15l-.471-.242L2 14.732l-.287-.445L1.268 14l-.026-.529L1 13l.242-.471.026-.529.445-.287.287-.445.529-.026z"/>
-                                </svg>
+                            <a href="{{ route('editUser', $user->id) }}" title="Manage Selected User" class="btn btn-success">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                                <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/>
+                            </svg>
                             </a>
                         </td>
                         <td class="text-center">
-                            <a href="" class="pt-.5 pb-2 px-1 bg-danger rounded" title="Remove Selected User">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="white" class="bi bi-person-x bg-danger" viewBox="0 0 16 16">
-                                    <path d="M11 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0M8 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4m.256 7a4.5 4.5 0 0 1-.229-1.004H3c.001-.246.154-.986.832-1.664C4.484 10.68 5.711 10 8 10q.39 0 .74.025c.226-.341.496-.65.804-.918Q8.844 9.002 8 9c-5 0-6 3-6 4s1 1 1 1z"/>
-                                    <path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7m-.646-4.854.646.647.646-.647a.5.5 0 0 1 .708.708l-.647.646.647.646a.5.5 0 0 1-.708.708l-.646-.647-.646.647a.5.5 0 0 1-.708-.708l.647-.646-.647-.646a.5.5 0 0 1 .708-.708"/>
+                            <form action="{{ route('removeUser', $user->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this user?');">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-archive-fill" viewBox="0 0 16 16">
+                                    <path d="M12.643 15C13.979 15 15 13.845 15 12.5V5H1v7.5C1 13.845 2.021 15 3.357 15zM5.5 7h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1 0-1M.8 1a.8.8 0 0 0-.8.8V3a.8.8 0 0 0 .8.8h14.4A.8.8 0 0 0 16 3V1.8a.8.8 0 0 0-.8-.8z"/>
                                 </svg>
-                            </a>
+                                </button>
+                            </form>
                         </td>
                     </tr>
-                 @endforeach
-                 <tr>
-                    <td colspan="7">
-                        {{ $users->links() }}
-                    </td>
-                 </tr>
+                    @endforeach
+                </tbody>
             </table>
         </div>
     </div>
-    <div class="row">
-        <div class="col">
-            <a href="{{ route('dash') }}" class="btn btn-success text-light">Back</a>
+    <div class="row mt-3">
+        <div class="col text-center">
+            <a href="{{ route('dash') }}" class="btn btn-dark">Back</a>
         </div>
     </div>
 </div>

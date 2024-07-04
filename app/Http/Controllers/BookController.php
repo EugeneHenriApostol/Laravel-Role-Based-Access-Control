@@ -55,4 +55,26 @@ class BookController extends Controller
             return redirect()->back();
         }
     }
+
+    public function saveNewLedgerEntry(Request $request) {
+        $response = Gate::inspect('create');
+        if ($response->allowed()) {
+            //validate request data
+            $request->validate([
+                'entrydetail' => 'required|string|max:255',
+                'entryamount' => 'required|numeric'
+            ]);
+            // save ledger
+
+            $book = new Book();
+            $book->entry = $request->input('entrydetail');
+            $book->amount = $request->input('entryamount');
+            $book->user_id = Auth::id();
+            $book->save();
+
+            return redirect()->route('ledgers')->with('success', 'New ledger entry created successfully!');
+        } else {
+            return redirect()->back();
+        }
+    }
 }

@@ -27,7 +27,7 @@ class AuthController extends Controller
         if($request->generate_email || ($request->email && $request->generate_email)){
              $email = fake()->unique()->safeEmail();
         } else {
-             $email = $request->email;
+            $email = $request->email;
         }
 
         $request->validate([
@@ -43,17 +43,11 @@ class AuthController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-        $userInfo = new UserInfo();
-        $userInfo->user_firstname = $request->firstname;
-        $userInfo->user_lastname = $request->lastname;
-        $userInfo->user_id = $request->id;
-        $userInfo->save();
-
-        // UserInfo::create([
-        //     'user_firstname' => $request->firstname,
-        //     'user_lastname' => $request->lastname,
-        //     'user_id' => $user->id
-        // ]);
+        UserInfo::create([
+            'user_firstname' => $request->firstname,
+            'user_lastname' => $request->lastname,
+            'user_id' => $user->id
+        ]);
 
 
         return redirect()->route('login');

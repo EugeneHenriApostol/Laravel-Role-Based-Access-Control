@@ -24,13 +24,14 @@ Route::middleware('auth')->group(function(){
 
     Route::get('/admin', [AdminController::class, 'index'])->name('dash')->middleware('role:admin');
     Route::get('/admin/users',[AdminController::class,'manageUsers'])->name('usertool')->middleware('role:admin');
-    Route::get('/admin/user/detail/{id}',[AdminController::class,'manageUserDetails'])->name('userdetails')->middleware('role:admin');
-    Route::put('/admin/user/detail/{id}',[AdminController::class,'storeUserDetails'])->name('saveuserdetails')->middleware('role:admin');
-    Route::get('/admin/user/pprofile/{id}',[AdminController::class,'getPermissionProfiles'])->name('pprofiles')->middleware('role:admin');
 
     Route::get('/acctg/new',[BookController::class,'newLedgerEntry'])->middleware(['role:admin,bookeeper,auditor'])->name('newledger');
     Route::post('/acctg/new',[BookController::class,'saveNewLedgerEntry'])->middleware('role:admin,bookeeper')->name('saveledger');
     Route::get('/acctg/view/all',[BookController::class,'showAllLedgers'])->middleware(['role:admin,bookeeper,auditor,audasst'])->name('ledgers');
     Route::get('/acctg/view/{id}',[BookController::class,'viewLedgerDetails'])->middleware(['role:admin,auditor,audasst'])->name('ledger');
+
+    Route::get('/admin/users/manage/{id}', [AdminController::class, 'editUser'])->name('editUser');
+    Route::delete('/admin/users/{id}', [AdminController::class, 'removeUser'])->name('removeUser');
+    Route::put('/admin/users/{id}', [AdminController::class, 'updateUser'])->name('updateUser');
 });
 
