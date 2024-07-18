@@ -7,7 +7,6 @@
     <div class="text-center mb-4">
         <h2>Edit User</h2>
     </div>
-
     
     <form action="{{ route('updateUser', $user->id) }}" method="POST">
         @csrf
@@ -44,11 +43,16 @@
         <div class="row mb-3">
             <label for="roles" class="col-sm-2 col-form-label">Roles</label>
             <div class="col-sm-10">
-                <select name="roles[]" id="roles" class="form-select" required>
+                <div class="form-check">
                     @foreach($roles as $role)
-                        <option value="{{ $role->id }}" {{ $user->roles->contains($role->id) ? 'selected' : '' }}>{{ $role->name }}</option>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="roles[]" id="role{{ $role->id }}" value="{{ $role->id }}" {{ $user->roles->contains($role->id) ? 'checked' : '' }}>
+                            <label class="form-check-label" for="role{{ $role->id }}">
+                                {{ $role->name }}
+                            </label>
+                        </div>
                     @endforeach
-                </select>
+                </div>
             </div>
         </div>
 

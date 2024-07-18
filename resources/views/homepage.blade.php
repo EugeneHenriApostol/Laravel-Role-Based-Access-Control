@@ -24,6 +24,12 @@
        <div class="mb-3">
            <a href="{{ route('dash') }}">Dashboard</a>
        </div>
+       <div class="mb-3">
+           <a href="{{ route('roles.index') }}">Manage Roles</a>
+       </div>
+       <div class="mb-3">
+           <a href="{{ route('permissions.index') }}">Manage Permissions</a>
+       </div>
     @endif
 </div>
 @endsection

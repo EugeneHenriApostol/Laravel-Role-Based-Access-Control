@@ -45,26 +45,6 @@ class AdminController extends Controller
         return redirect()->route('usertool')->with('success', 'User removed successfully'); //redirects to the user management page
     }
 
-    // public function updateUser(Request $request, $id) {
-    // $user = User::findOrFail($id);
-
-    // $request->validate([
-    //     'name' => 'required|string|max:255',
-    //     'email' => 'required|string|email|max:255',
-    //     'roles' => 'required|array', //roles are set as array
-    // ]);
-
-    // $user->update([
-    //     'name' => $request->name,
-    //     'email' => $request->email,
-    // ]);
-
-    // // Sync roles
-    // $user->roles()->sync($request->roles);
-
-    // return redirect()->route('usertool')->with('success', 'User updated successfully');
-    // }
-
     public function updateUser(Request $request, $id)
     {
         //validate request data 

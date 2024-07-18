@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('books', function (Blueprint $table) {
             $table->id();
             $table->string('entry',100)->nullable();
-            $table->float('amount',9,2)->nullable();
+            $table->float('amount',9)->nullable();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
